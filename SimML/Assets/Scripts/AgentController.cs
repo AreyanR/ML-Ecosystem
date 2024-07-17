@@ -55,16 +55,66 @@ public class AgentController : Agent
 
         for (int i = 0; i < pelletCount; i++)
         {
+
+            int counter = 0;
+            bool isOverlapping;
+            bool beedDecramented = false;
+
             GameObject newPellet = Instantiate(food);
             //make pellet child of env
             newPellet.transform.parent = environmentLocation;
             //Give random spawn location
             Vector3 pelletLocation = new Vector3(Random.Range(-4f,4f),0.31f,Random.Range(-4f,4f));
+
+            if(spawnedPelletList.Count != 0)
+            {
+                for(int j = 0; j < spawnedPelletList.Count; j++)
+                {
+                    if(counter <= 10)
+                    {
+                        isOverlapping = CheckOverlap(pelletLocation, spawnedPelletList[j].transform.localPosition, 5f);
+                        if (isOverlapping == false)
+                        {
+                            pelletLocation = new Vector3(Random.Range(-4f, 4f), 0.31f, Random.Range(-4f, 4f));
+                            j--;
+                            beedDecramented = true;
+                        }
+
+                        isOverlapping = CheckOverlap(pelletLocation, transform.localPosition, 5f);
+                        if (isOverlapping == false)
+                        {
+                            pelletLocation = new Vector3(Random.Range(-4f, 4f), 0.31f, Random.Range(-4f, 4f));
+                            if(beedDecramented == false)
+                            {
+                                j--;
+                            
+                            }
+                        }
+                        counter++;
+                    }
+                    else
+                    {
+                        j = spawnedPelletList.Count;
+                    }
+                }
+                
+            }
+
             //Spawn in new location
             newPellet.transform.localPosition = pelletLocation;
             //Add to list
             spawnedPelletList.Add(newPellet);
         }
+    }
+
+    private bool CheckOverlap(Vector3 overlappingObj, Vector3 existingObj, float minDistance)
+    {
+        float distancebtw = Vector3.Distance(overlappingObj, existingObj);
+        if (minDistance <= distancebtw)
+        {
+            return true;
+        }
+        return false;
     }
 
     private void RemovePellet(List<GameObject> spawnedPelletList)
