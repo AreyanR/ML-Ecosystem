@@ -71,3 +71,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 SimML/Library/PackageCache/com.unity.burst@1.8.7/.Runtime/libburst-llvm-15.dylib
+SimML/venv/Lib/site-packages/torch/lib/torch_cpu.dll
+SimML/venv/Lib/site-packages/torch/lib/dnnl.lib
