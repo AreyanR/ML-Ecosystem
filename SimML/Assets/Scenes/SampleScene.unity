@@ -344,6 +344,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1009612130530583645, guid: bf678d6ca8304dc4d85f03ab3b96cdf3, type: 3}
+      propertyPath: timeForEpisode
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1009612130530583645, guid: bf678d6ca8304dc4d85f03ab3b96cdf3, type: 3}
       propertyPath: environmentLocation
       value: 
       objectReference: {fileID: 708214041}

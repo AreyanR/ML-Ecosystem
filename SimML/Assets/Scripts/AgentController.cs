@@ -25,6 +25,10 @@ public class AgentController : Agent
     Material envMaterial;
     public GameObject env;
 
+    //Time keeping variables
+    [SerializeField] private float timeForEpisode;
+    private float timeLeft;
+
 
     public override void Initialize()
     {
@@ -37,14 +41,19 @@ public class AgentController : Agent
         //Agent
         transform.localPosition = new Vector3(Random.Range(-4f,4f),0.31f,Random.Range(-4f,4f));
 
-        //target.localPosition = new Vector3(Random.Range(-4f,4f),0.31f,Random.Range(-4f,4f));
-
         //pellet
         CreatePellet();
-        
+
+        //Timer for agent if taking too long and be punished
+        EpisodeTimerNew();
         
     }
 
+
+    private void Update()
+    {
+        CheckRemainingTime();
+    }
 
     private void CreatePellet()
     {
@@ -180,6 +189,23 @@ public class AgentController : Agent
             envMaterial.color = Color.red;
             RemovePellet(spawnedPelletList);
             AddReward(-15f);
+            EndEpisode();
+        }
+    }
+
+    private void EpisodeTimerNew()
+    {
+        timeLeft = Time.time + timeForEpisode;
+
+    }
+
+    private void CheckRemainingTime()
+    {
+        if(Time.time >= timeLeft)
+        {
+            envMaterial.color = Color.blue;
+            AddReward(-15f);
+            RemovePellet(spawnedPelletList);
             EndEpisode();
         }
     }
