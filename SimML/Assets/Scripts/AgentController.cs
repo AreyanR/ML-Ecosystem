@@ -29,6 +29,9 @@ public class AgentController : Agent
     [SerializeField] private float timeForEpisode;
     private float timeLeft;
 
+    //Enemy Hunter
+    public HunterController HunterController;
+
 
     public override void Initialize()
     {
@@ -116,7 +119,7 @@ public class AgentController : Agent
         }
     }
 
-    private bool CheckOverlap(Vector3 overlappingObj, Vector3 existingObj, float minDistance)
+    public bool CheckOverlap(Vector3 overlappingObj, Vector3 existingObj, float minDistance)
     {
         float distancebtw = Vector3.Distance(overlappingObj, existingObj);
         if (minDistance <= distancebtw)
@@ -180,6 +183,8 @@ public class AgentController : Agent
                 envMaterial.color = Color.green;
                 RemovePellet(spawnedPelletList);
                 AddReward(5f);
+                HunterController.AddReward(-5f);
+                HunterController.EndEpisode();
                 EndEpisode();
             }
         }
@@ -189,6 +194,7 @@ public class AgentController : Agent
             envMaterial.color = Color.red;
             RemovePellet(spawnedPelletList);
             AddReward(-15f);
+            HunterController.EndEpisode();
             EndEpisode();
         }
     }
@@ -205,7 +211,9 @@ public class AgentController : Agent
         {
             envMaterial.color = Color.blue;
             AddReward(-15f);
+            HunterController.AddReward(-15f);
             RemovePellet(spawnedPelletList);
+            HunterController.EndEpisode();
             EndEpisode();
         }
     }
