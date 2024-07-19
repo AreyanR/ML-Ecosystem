@@ -22,6 +22,7 @@ public class HunterController : Agent
 
 
 
+
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
@@ -49,7 +50,8 @@ public class HunterController : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(transform.localPosition);
-        //sensor.AddObservation(target.localPosition);
+        sensor.AddObservation(prey.transform.localPosition);
+
     }
     
         
@@ -62,12 +64,7 @@ public class HunterController : Agent
         rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.deltaTime);
         transform.Rotate(0f, moveRotate * moveSpeed, 0f, Space.Self);
 
-        /*
-        Vector3 velocity = new Vector3(moveX,0f,moveZ) * Time.deltaTime * moveSpeed;
-        velocity = velocity.normalized * moveSpeed * Time.deltaTime;
-        transform.localPosition += velocity;
-
-        */
+       
     }
 
 
