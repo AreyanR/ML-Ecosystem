@@ -1,119 +1,104 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;  // Add this to use the UI components
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 
 public class AgentController : Agent
 {
-
-    //Pellet variables
-    public int pelletCount;
+    // Pellet variables
     public GameObject food;
     [SerializeField] private List<GameObject> spawnedPelletList = new List<GameObject>();
     [SerializeField] private Transform target;
 
-
-//Agent variables
+    // Agent variables
     [SerializeField] private float moveSpeed = 4f;
     private Rigidbody rb;
 
-
-    // env variables
+    // Env variables
     [SerializeField] private Transform environmentLocation;
     Material envMaterial;
     public GameObject env;
+    public List<GameObject> shrubs;
 
-    //Time keeping variables
-    [SerializeField] private float timeForEpisode;
-    private float timeLeft;
+    // Hunger timer variables
+    [SerializeField] private float agentHungerDuration;
+    private float agentHungerTimeLeft;
 
-    //Enemy Hunter
+    // Slider UI component
+    public Slider hungerSlider;
+
+    // Enemy Hunter
     public HunterController HunterController;
-
 
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
         envMaterial = env.GetComponent<Renderer>().material;
+        hungerSlider.maxValue = agentHungerDuration;
     }
 
     public override void OnEpisodeBegin()
     {
-        //Agent
-        transform.localPosition = new Vector3(Random.Range(-8f,8f),0.31f,Random.Range(-8f,8f));
+        SceneSetup sceneSetup = transform.parent.GetComponentInChildren<SceneSetup>();
+        if (sceneSetup != null)
+        {
+            sceneSetup.ResetEnvironment();
+        }
 
-        //pellet
-        CreatePellet();
+        // Agent
+        transform.localPosition = new Vector3(Random.Range(-8f, 8f), 0.31f, Random.Range(-8f, 8f));
 
-        //Timer for agent if taking too long and be punished
-        EpisodeTimerNew();
-        
+        // Pellet
+        CreateRandomPellets();
+
+        // Hunger timer for agent
+        StartAgentHungerTimer();
     }
-
 
     private void Update()
     {
-        CheckRemainingTime();
+        CheckAgentHungerTime();
     }
 
-    private void CreatePellet()
+    private void CreateRandomPellets()
     {
-        if(spawnedPelletList.Count != 0)
+        int pelletCount = Random.Range(1, 6); // Random number of pellets between 1 and 5
+        CreatePellet(pelletCount);
+    }
+
+    private void CreatePellet(int count)
+    {
+        for (int i = 0; i < count; i++)
         {
-            RemovePellet(spawnedPelletList);
-        }
+            bool positionValid = false;
+            Vector3 pelletLocation = Vector3.zero;
 
-        for (int i = 0; i < pelletCount; i++)
-        {
-
-            int counter = 0;
-            bool isOverlapping;
-            bool beedDecramented = false;
-
-            GameObject newPellet = Instantiate(food);
-            //make pellet child of env
-            newPellet.transform.parent = environmentLocation;
-            //Give random spawn location
-            Vector3 pelletLocation = new Vector3(Random.Range(-8f,8f),0.31f,Random.Range(-8f,8f));
-            if(spawnedPelletList.Count != 0)
+            while (!positionValid)
             {
-                for(int j = 0; j < spawnedPelletList.Count; j++)
-                {
-                    if(counter <= 10)
-                    {
-                        isOverlapping = CheckOverlap(pelletLocation, spawnedPelletList[j].transform.localPosition, 5f);
-                        if (isOverlapping == false)
-                        {
-                            pelletLocation = new Vector3(Random.Range(-8f,8f),0.31f,Random.Range(-8f,8f));
-                            j--;
-                            beedDecramented = true;
-                        }
+                pelletLocation = new Vector3(Random.Range(-8f, 8f), 0.31f, Random.Range(-8f, 8f));
+                positionValid = true;
 
-                        isOverlapping = CheckOverlap(pelletLocation, transform.localPosition, 5f);
-                        if (isOverlapping == false)
-                        {
-                            pelletLocation = new Vector3(Random.Range(-8f,8f),0.31f,Random.Range(-8f,8f));
-                            if(beedDecramented == false)
-                            {
-                                j--;
-                            
-                            }
-                        }
-                        counter++;
-                    }
-                    else
+                foreach (GameObject shrub in shrubs)
+                {
+                    if (CheckOverlap(pelletLocation, shrub.transform.localPosition, 5f))
                     {
-                        j = spawnedPelletList.Count;
+                        positionValid = false;
+                        break;
                     }
                 }
-                
+
+                if (CheckOverlap(pelletLocation, transform.localPosition, 5f))
+                {
+                    positionValid = false;
+                }
             }
 
-            //Spawn in new location
+            GameObject newPellet = Instantiate(food);
+            newPellet.transform.parent = environmentLocation;
             newPellet.transform.localPosition = pelletLocation;
-            //Add to list
             spawnedPelletList.Add(newPellet);
         }
     }
@@ -121,18 +106,14 @@ public class AgentController : Agent
     public bool CheckOverlap(Vector3 overlappingObj, Vector3 existingObj, float minDistance)
     {
         float distancebtw = Vector3.Distance(overlappingObj, existingObj);
-        if (minDistance <= distancebtw)
-        {
-            return true;
-        }
-        return false;
+        return minDistance <= distancebtw;
     }
 
-    private void RemovePellet(List<GameObject> spawnedPelletList)
+    public void RemoveAllPellets()
     {
-        foreach (GameObject i in spawnedPelletList)
+        foreach (GameObject pellet in spawnedPelletList)
         {
-            Destroy(i.gameObject);
+            Destroy(pellet);
         }
         spawnedPelletList.Clear();
     }
@@ -140,27 +121,17 @@ public class AgentController : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(transform.localPosition);
-        //sensor.AddObservation(target.localPosition);
+        sensor.AddObservation(target.localPosition);
     }
-    
-        
-    
+
     public override void OnActionReceived(ActionBuffers actions)
     {
         float moveRotate = actions.ContinuousActions[0];
         float moveForward = actions.ContinuousActions[1];
-        
+
         rb.MovePosition(transform.position + transform.forward * moveForward * moveSpeed * Time.deltaTime);
         transform.Rotate(0f, moveRotate * moveSpeed, 0f, Space.Self);
-
-        /*
-        Vector3 velocity = new Vector3(moveX,0f,moveZ) * Time.deltaTime * moveSpeed;
-        velocity = velocity.normalized * moveSpeed * Time.deltaTime;
-        transform.localPosition += velocity;
-
-        */
     }
-
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
@@ -171,50 +142,51 @@ public class AgentController : Agent
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Pellet")
+        if (other.gameObject.tag == "Pellet")
         {
-            //Remove from list
             spawnedPelletList.Remove(other.gameObject);
             Destroy(other.gameObject);
             AddReward(10f);
-            if(spawnedPelletList.Count == 0)
+            agentHungerTimeLeft += 3.0f;
+            hungerSlider.value = agentHungerTimeLeft;
+
+            // Check if all pellets are collected
+            if (spawnedPelletList.Count == 0)
             {
-                envMaterial.color = Color.green;
-                RemovePellet(spawnedPelletList);
+                Debug.Log("Prey got all the food");
                 AddReward(5f);
-                HunterController.AddReward(-5f);
-                HunterController.EndEpisode();
-                EndEpisode();
+                CreateRandomPellets(); // Spawn new set of random pellets
             }
         }
 
-        if(other.gameObject.tag == "Wall")
+        if (other.gameObject.tag == "Wall")
         {
-            envMaterial.color = Color.red;
-            RemovePellet(spawnedPelletList);
+            Debug.Log("Prey hit wall");
             AddReward(-15f);
+            RemoveAllPellets(); // Remove all pellets when hitting a wall
             HunterController.EndEpisode();
-            EndEpisode();
+            EndEpisode(); // End agent's episode only
         }
     }
 
-    private void EpisodeTimerNew()
+    private void StartAgentHungerTimer()
     {
-        timeLeft = Time.time + timeForEpisode;
-
+        agentHungerTimeLeft = agentHungerDuration;
+        hungerSlider.value = agentHungerTimeLeft;
     }
 
-    private void CheckRemainingTime()
+    private void CheckAgentHungerTime()
     {
-        if(Time.time >= timeLeft)
+        agentHungerTimeLeft -= Time.deltaTime;
+        hungerSlider.value = agentHungerTimeLeft;
+
+        if (agentHungerTimeLeft <= 0)
         {
-            envMaterial.color = Color.blue;
+            Debug.Log("Prey starved");
             AddReward(-15f);
-            HunterController.AddReward(-15f);
-            RemovePellet(spawnedPelletList);
+            RemoveAllPellets(); // Remove all pellets when starving
             HunterController.EndEpisode();
-            EndEpisode();
+            EndEpisode(); // End agent's episode only
         }
     }
 }
-
