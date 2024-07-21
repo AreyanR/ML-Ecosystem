@@ -90,10 +90,10 @@ public class HunterController : Agent
         if (other.gameObject.tag == "Agent")
         {
             // Remove from list
-            AddReward(10f);
-            AgentController.AddReward(-13f);
+            AddReward(20f);
+            AgentController.AddReward(-12.5f);
             // Add 2 seconds to hunter's hunger timer
-            hunterHungerTimeLeft += 5.0f;
+            hunterHungerTimeLeft += 15f;
             Debug.Log("Hunter ate prey");
             AgentController.RemoveAllPellets(); // Remove all pellets when agent is eaten
             AgentController.EndEpisode();

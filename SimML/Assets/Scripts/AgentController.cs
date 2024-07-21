@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;  // Add this to use the UI components
+using UnityEngine.UI;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
@@ -83,14 +83,23 @@ public class AgentController : Agent
 
                 foreach (GameObject shrub in shrubs)
                 {
-                    if (CheckOverlap(pelletLocation, shrub.transform.localPosition, 5f))
+                    if (CheckOverlap(pelletLocation, shrub.transform.localPosition, 1.0f)) // Check overlap with shrubs
                     {
                         positionValid = false;
                         break;
                     }
                 }
 
-                if (CheckOverlap(pelletLocation, transform.localPosition, 5f))
+                foreach (GameObject pellet in spawnedPelletList)
+                {
+                    if (CheckOverlap(pelletLocation, pellet.transform.localPosition, 1.0f)) // Check overlap with other pellets
+                    {
+                        positionValid = false;
+                        break;
+                    }
+                }
+
+                if (CheckOverlap(pelletLocation, transform.localPosition, 1.0f)) // Check overlap with agent
                 {
                     positionValid = false;
                 }
@@ -106,7 +115,7 @@ public class AgentController : Agent
     public bool CheckOverlap(Vector3 overlappingObj, Vector3 existingObj, float minDistance)
     {
         float distancebtw = Vector3.Distance(overlappingObj, existingObj);
-        return minDistance <= distancebtw;
+        return distancebtw < minDistance; // Overlap condition
     }
 
     public void RemoveAllPellets()
@@ -146,8 +155,8 @@ public class AgentController : Agent
         {
             spawnedPelletList.Remove(other.gameObject);
             Destroy(other.gameObject);
-            AddReward(10f);
-            agentHungerTimeLeft += 3.0f;
+            AddReward(15f);
+            agentHungerTimeLeft += 10f;
             hungerSlider.value = agentHungerTimeLeft;
 
             // Check if all pellets are collected
