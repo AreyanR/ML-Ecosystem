@@ -49,9 +49,10 @@ public class AgentController : Agent
         }
 
         // Agent
-        transform.localPosition = new Vector3(Random.Range(-8f, 8f), 0.31f, Random.Range(-8f, 8f));
+        RespawnAgent();
 
         // Pellet
+        RemoveAllPellets();
         CreateRandomPellets();
 
         // Hunger timer for agent
@@ -155,8 +156,9 @@ public class AgentController : Agent
         {
             spawnedPelletList.Remove(other.gameObject);
             Destroy(other.gameObject);
-            AddReward(15f);
-            agentHungerTimeLeft += 10f;
+            AddReward(20f);
+            agentHungerTimeLeft += 20f;
+            agentHungerTimeLeft = Mathf.Clamp(agentHungerTimeLeft, 0, agentHungerDuration); // Clamp the hunger time
             hungerSlider.value = agentHungerTimeLeft;
 
             // Check if all pellets are collected
@@ -164,7 +166,7 @@ public class AgentController : Agent
             {
                 Debug.Log("Prey got all the food");
                 AddReward(5f);
-                CreateRandomPellets(); // Spawn new set of random pellets
+                CreateRandomPellets();
             }
         }
 
@@ -174,7 +176,7 @@ public class AgentController : Agent
             AddReward(-15f);
             RemoveAllPellets(); // Remove all pellets when hitting a wall
             HunterController.EndEpisode();
-            EndEpisode(); // End agent's episode only
+            EndEpisode(); // End episode for both agents
         }
     }
 
@@ -195,7 +197,20 @@ public class AgentController : Agent
             AddReward(-15f);
             RemoveAllPellets(); // Remove all pellets when starving
             HunterController.EndEpisode();
-            EndEpisode(); // End agent's episode only
+            EndEpisode(); // End episode for both agents
         }
+    }
+
+    public void RespawnAgent()
+    {
+        // Respawn the agent at a new random location
+        transform.localPosition = new Vector3(Random.Range(-8f, 8f), 0.31f, Random.Range(-8f, 8f));
+
+        // Reset the hunger timer
+        StartAgentHungerTimer();
+
+        // Regenerate pellets
+        RemoveAllPellets();
+        CreateRandomPellets();
     }
 }

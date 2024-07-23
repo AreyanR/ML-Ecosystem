@@ -7,8 +7,8 @@ public class SceneSetup : MonoBehaviour
     public List<GameObject> shrubPrefabs;
     public List<int> numberOfShrubs;
 
-    private Vector3 spawnAreaMin = new Vector3(-8, 0, -8);
-    private Vector3 spawnAreaMax = new Vector3(8, 0, 8);
+    private Vector3 spawnAreaMin = new Vector3(-9, 0, -9);
+    private Vector3 spawnAreaMax = new Vector3(9, 0, 9);
 
     public Transform shrubContainer;
 

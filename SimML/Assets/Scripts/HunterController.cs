@@ -93,11 +93,10 @@ public class HunterController : Agent
             AddReward(20f);
             AgentController.AddReward(-12.5f);
             // Add 2 seconds to hunter's hunger timer
-            hunterHungerTimeLeft += 15f;
+            hunterHungerTimeLeft += 30f;
+            hunterHungerTimeLeft = Mathf.Clamp(hunterHungerTimeLeft, 0, hunterHungerDuration); // Clamp the hunger time
             Debug.Log("Hunter ate prey");
-            AgentController.RemoveAllPellets(); // Remove all pellets when agent is eaten
-            AgentController.EndEpisode();
-            EndEpisode();
+            AgentController.RespawnAgent();
         }
 
         if (other.gameObject.tag == "Wall")

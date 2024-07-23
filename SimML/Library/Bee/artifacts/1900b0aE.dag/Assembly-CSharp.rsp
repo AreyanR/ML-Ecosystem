@@ -372,6 +372,8 @@
 -analyzer:"D:/Users/2022.3.7f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"D:/Users/2022.3.7f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/AgentController.cs"
+"Assets/Scripts/CameraMover.cs"
+"Assets/Scripts/CameraTransform.cs"
 "Assets/Scripts/FollowCamera.cs"
 "Assets/Scripts/HunterController.cs"
 "Assets/Scripts/SceneSetup.cs"
