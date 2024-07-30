@@ -1,0 +1,123 @@
+{
+    "Agent Controller": {
+        "checkpoints": [
+            {
+                "steps": 499968,
+                "file_path": "results\\refine3\\Agent Controller\\Agent Controller-499968.onnx",
+                "reward": 52.21153846153846,
+                "creation_time": 1722371518.5781498,
+                "auxillary_file_paths": [
+                    "results\\refine3\\Agent Controller\\Agent Controller-499968.pt"
+                ]
+            },
+            {
+                "steps": 999946,
+                "file_path": "results\\refine3\\Agent Controller\\Agent Controller-999946.onnx",
+                "reward": 50.26315789473684,
+                "creation_time": 1722372212.744772,
+                "auxillary_file_paths": [
+                    "results\\refine3\\Agent Controller\\Agent Controller-999946.pt"
+                ]
+            },
+            {
+                "steps": 1499990,
+                "file_path": "results\\refine3\\Agent Controller\\Agent Controller-1499990.onnx",
+                "reward": 46.680672268907564,
+                "creation_time": 1722372948.3785222,
+                "auxillary_file_paths": [
+                    "results\\refine3\\Agent Controller\\Agent Controller-1499990.pt"
+                ]
+            },
+            {
+                "steps": 1999968,
+                "file_path": "results\\refine3\\Agent Controller\\Agent Controller-1999968.onnx",
+                "reward": 51.75675675675676,
+                "creation_time": 1722373728.110656,
+                "auxillary_file_paths": [
+                    "results\\refine3\\Agent Controller\\Agent Controller-1999968.pt"
+                ]
+            },
+            {
+                "steps": 2000006,
+                "file_path": "results\\refine3\\Agent Controller\\Agent Controller-2000006.onnx",
+                "reward": 51.13333333333333,
+                "creation_time": 1722373728.2187846,
+                "auxillary_file_paths": [
+                    "results\\refine3\\Agent Controller\\Agent Controller-2000006.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2000006,
+            "file_path": "results\\refine3\\Agent Controller.onnx",
+            "reward": 51.13333333333333,
+            "creation_time": 1722373728.2187846,
+            "auxillary_file_paths": [
+                "results\\refine3\\Agent Controller\\Agent Controller-2000006.pt"
+            ]
+        }
+    },
+    "Hunter Controller": {
+        "checkpoints": [
+            {
+                "steps": 499968,
+                "file_path": "results\\refine3\\Hunter Controller\\Hunter Controller-499968.onnx",
+                "reward": 15.576923076923077,
+                "creation_time": 1722371518.6530213,
+                "auxillary_file_paths": [
+                    "results\\refine3\\Hunter Controller\\Hunter Controller-499968.pt"
+                ]
+            },
+            {
+                "steps": 999946,
+                "file_path": "results\\refine3\\Hunter Controller\\Hunter Controller-999946.onnx",
+                "reward": 19.07894736842105,
+                "creation_time": 1722372212.7948678,
+                "auxillary_file_paths": [
+                    "results\\refine3\\Hunter Controller\\Hunter Controller-999946.pt"
+                ]
+            },
+            {
+                "steps": 1499990,
+                "file_path": "results\\refine3\\Hunter Controller\\Hunter Controller-1499990.onnx",
+                "reward": 19.95798319327731,
+                "creation_time": 1722372950.2861385,
+                "auxillary_file_paths": [
+                    "results\\refine3\\Hunter Controller\\Hunter Controller-1499990.pt"
+                ]
+            },
+            {
+                "steps": 1999968,
+                "file_path": "results\\refine3\\Hunter Controller\\Hunter Controller-1999968.onnx",
+                "reward": 19.256756756756758,
+                "creation_time": 1722373728.1711688,
+                "auxillary_file_paths": [
+                    "results\\refine3\\Hunter Controller\\Hunter Controller-1999968.pt"
+                ]
+            },
+            {
+                "steps": 2000006,
+                "file_path": "results\\refine3\\Hunter Controller\\Hunter Controller-2000006.onnx",
+                "reward": 19.333333333333332,
+                "creation_time": 1722373728.2733443,
+                "auxillary_file_paths": [
+                    "results\\refine3\\Hunter Controller\\Hunter Controller-2000006.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2000006,
+            "file_path": "results\\refine3\\Hunter Controller.onnx",
+            "reward": 19.333333333333332,
+            "creation_time": 1722373728.2733443,
+            "auxillary_file_paths": [
+                "results\\refine3\\Hunter Controller\\Hunter Controller-2000006.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.3.1+cpu"
+    }
+}
