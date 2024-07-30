@@ -33,30 +33,30 @@ public class HunterController : Agent
         hungerSlider.maxValue = hunterHungerDuration;
     }
 
-    public override void OnEpisodeBegin()
+   public override void OnEpisodeBegin()
+{
+    SceneSetup sceneSetup = FindObjectOfType<SceneSetup>();
+    if (sceneSetup != null)
     {
-        SceneSetup sceneSetup = FindObjectOfType<SceneSetup>();
-        if (sceneSetup != null)
-        {
-            sceneSetup.ResetEnvironment();
-        }
-
-        // Hunter
-        Vector3 spawnlocation = new Vector3(Random.Range(-8f, 8f), 0.31f, Random.Range(-8f, 8f));
-
-        bool distanceGood = AgentController.CheckOverlap(prey.transform.localPosition, spawnlocation, 5f);
-
-        while (!distanceGood)
-        {
-            spawnlocation = new Vector3(Random.Range(-8f, 8f), 0.31f, Random.Range(-8f, 8f));
-            distanceGood = AgentController.CheckOverlap(prey.transform.localPosition, spawnlocation, 5f);
-        }
-
-        transform.localPosition = spawnlocation;
-
-        // Hunger timer for hunter
-        StartHunterHungerTimer();
+        sceneSetup.ResetEnvironment();
     }
+
+    // Hunter
+    Vector3 spawnLocation = Vector3.zero;
+    bool positionValid = false;
+
+    while (!positionValid)
+    {
+        spawnLocation = new Vector3(Random.Range(-8f, 8f), 0.31f, Random.Range(-8f, 8f));
+        positionValid = !AgentController.CheckOverlap(prey.transform.localPosition, spawnLocation, 7f); // Ensure it's at least 5 units away from the prey
+    }
+
+    transform.localPosition = spawnLocation;
+
+    // Hunger timer for hunter
+    StartHunterHungerTimer();
+}
+
 
     private void Update()
     {
@@ -90,13 +90,14 @@ public class HunterController : Agent
         if (other.gameObject.tag == "Agent")
         {
             // Remove from list
-            AddReward(20f);
-            AgentController.AddReward(-12.5f);
+            AddReward(25f);
+            AgentController.AddReward(-15f);
             // Add 2 seconds to hunter's hunger timer
             hunterHungerTimeLeft += 30f;
             hunterHungerTimeLeft = Mathf.Clamp(hunterHungerTimeLeft, 0, hunterHungerDuration); // Clamp the hunger time
             Debug.Log("Hunter ate prey");
-            AgentController.RespawnAgent();
+            AgentController.EndEpisode();
+            EndEpisode();
         }
 
         if (other.gameObject.tag == "Wall")
@@ -129,4 +130,5 @@ public class HunterController : Agent
             EndEpisode();
         }
     }
+
 }

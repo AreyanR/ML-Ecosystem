@@ -1589,7 +1589,7 @@ MonoBehaviour:
   m_text: "\nThe primary goal of the predator is to catch the prey.\n\n\nPredator
     agents move through the environment, tracking and chasing prey agents.\n\n\nThe
     predator\u2019s hunger timer is extended each time it successfully catches a
-    prey, ensuring its continued survival."
+    prey."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2887,7 +2887,7 @@ MonoBehaviour:
     for inefficient movement.
 
 
-    Gets hunted: Penalty, ending the agent''s run.
+    Gets hunted: Penalty, for being eaten by predator.
 
 
     Starves:
@@ -3669,15 +3669,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'In this simulation, a dynamic environment spawns random forests, adding
-    complexity. There are two types of agents: prey and predator. The prey''s main
-    objective is to collect blue pellets scattered throughout the environment, while
-    the predator''s mission is to catch the prey. The simulation includes various
-    features, such as multiple points of view that allow users to switch between
-    different camera angles to observe. Additionally, the environment includes various
-    obstacles and terrains that impact the movement and strategies of both prey and
-    predator agents. A bar above each agent''s head indicates its hunger level, providing
-    a visual cue to monitor their status and urgency for finding food.'
+  m_text: "In this simulation, there are two types of agents: prey and predators.
+    The prey's main objective is to collect blue pellets scattered throughout the
+    environment, while the predators aim to catch the prey. Users can switch between
+    various camera angles to observe the action from multiple points of view. The
+    environment features obstacles and terrains that influence the movement and strategies
+    of both prey and predators. A hunger bar above each agent\u2019s head provides
+    a visual cue to monitor their status and urgency in finding food. The ultimate
+    goal for both types of agents is to survive."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

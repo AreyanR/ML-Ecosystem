@@ -12,6 +12,7 @@ public class AgentController : Agent
     public GameObject food;
     [SerializeField] private List<GameObject> spawnedPelletList = new List<GameObject>();
     [SerializeField] private Transform target;
+    [SerializeField] private int pelletCount = 5; // Serialized field for the number of pellets
 
     // Agent variables
     [SerializeField] private float moveSpeed = 4f;
@@ -53,7 +54,7 @@ public class AgentController : Agent
 
         // Pellet
         RemoveAllPellets();
-        CreateRandomPellets();
+        CreatePellets();
 
         // Hunger timer for agent
         StartAgentHungerTimer();
@@ -64,9 +65,8 @@ public class AgentController : Agent
         CheckAgentHungerTime();
     }
 
-    private void CreateRandomPellets()
+    private void CreatePellets()
     {
-        int pelletCount = Random.Range(1, 6); // Random number of pellets between 1 and 5
         CreatePellet(pelletCount);
     }
 
@@ -166,7 +166,9 @@ public class AgentController : Agent
             {
                 Debug.Log("Prey got all the food");
                 AddReward(5f);
-                CreateRandomPellets();
+                HunterController.EndEpisode();
+                EndEpisode(); // End episode for both agents
+                //CreatePellets();
             }
         }
 
@@ -202,15 +204,24 @@ public class AgentController : Agent
     }
 
     public void RespawnAgent()
+{
+    // Ensure the agent respawns at a new random location, not too close to the hunter
+    Vector3 spawnLocation = Vector3.zero; // Initialize with a default value
+    bool positionValid = false;
+
+    while (!positionValid)
     {
-        // Respawn the agent at a new random location
-        transform.localPosition = new Vector3(Random.Range(-8f, 8f), 0.31f, Random.Range(-8f, 8f));
-
-        // Reset the hunger timer
-        StartAgentHungerTimer();
-
-        // Regenerate pellets
-        RemoveAllPellets();
-        CreateRandomPellets();
+        spawnLocation = new Vector3(Random.Range(-8f, 8f), 0.31f, Random.Range(-8f, 8f));
+        positionValid = !CheckOverlap(spawnLocation, HunterController.transform.localPosition, 7f); // Ensure it's at least 5 units away from the hunter
     }
+
+    transform.localPosition = spawnLocation;
+
+    // Reset the hunger timer
+    StartAgentHungerTimer();
+
+    // Regenerate pellets
+    RemoveAllPellets();
+    CreatePellets();
+}
 }
