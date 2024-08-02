@@ -18,10 +18,10 @@ This project is a machine learning simulation that explores the dynamics between
 I built this project from scratch using the ML-Agents package in Unity, driven by my passion for machine learning and artificial intelligence. Everything you see here is the result of self-learning, building on the skills I've developed in game development. This project is not a game but a simulation. I chose C#/Unity because it offers a visual interface.
 
 ## Reinforcement Learning Parameters
-Each agent is equipped with basic movement and vision capabilities using ray sensors.
+Each agent is equipped with basic movement and vision capabilities using ray sensors. 
 (Ray sensors are like virtual eyes for the agents—they cast invisible rays in different directions to detect obstacles, walls, and other objects in the environment.)
 
-### **Prey (Deer)** 
+### **Prey (Deer)**
 - **Traits:** 
   - The prey is slightly faster than the predator.
   - The prey has a wider vision, allowing it to see more of its surroundings.
@@ -49,17 +49,15 @@ Each agent is equipped with basic movement and vision capabilities using ray sen
 - Penalized for hitting a wall.
 - Penalized for starving.
 
-
 ## Learning Process
 The agents in this simulation learn through reinforcement learning, a process where they interact with their environment, make decisions, and receive rewards or penalties based on their actions. Over time, these interactions help the agents improve their behavior as their neural networks are updated with each experience.
 
 ## Discoveries During Simulation
-
 I ran a 1,000,000-step training session and found some pretty interesting things along the way. Check out the clips from each step [here](https://drive.google.com/file/d/1tRmuYEN2a70zLzCFZwxRI4D_R0hqJYjp/view?usp=drive_link).
 
 ### Step 250,000
 **Prey (Deer)**
-- The deer has learned to seek out the blue pellets.
+- The deer has hesitantly learned to seek out the blue pellets.
 - Once the deer spots a pellet, it reliably goes for it.
 
 **Predator (Tiger)**
@@ -90,7 +88,6 @@ I ran a 1,000,000-step training session and found some pretty interesting things
 
 By step 1,000,000, both agents had found the most efficient way to exist in the environment they were placed in.
 
-
 ### How to Run
 You can download a zip of the built project from this [link](https://drive.google.com/file/d/1AWtH4ZbsOXxY0pNy-b7MkI9A6Ywi9g-Z/view?usp=drive_link). The agents' models included in the build are the highest-performing versions achieved through training.
 
@@ -99,7 +96,6 @@ You can download a zip of the built project from this [link](https://drive.googl
 - **About Page:** [Preview the about page here](https://drive.google.com/file/d/1_JXXQx3bYDSpO4pDlHipU8RrZVquqkWV/view?usp=drive_link)
 
 ## Contact
-
 If you have any questions, suggestions, or just want to connect, feel free to reach out to me:
 
 - Email: areyanr@hotmail.com
