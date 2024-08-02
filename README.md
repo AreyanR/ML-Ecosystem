@@ -5,17 +5,16 @@ This project is a machine learning simulation that explores the dynamics between
 
 ## Key Features
 - **Reinforcement Learning:** Both the prey and predator are trained using reinforcement learning techniques, learning to maximize their rewards through trial and error.
-
 - **Agent Behaviors:** The prey learns to collect pellets and evade the predator, while the predator learns to track and catch the prey. The behavior of both agents evolves over time as they learn from their environment and each other.
-
 - **Dynamic Environment:** The environment is randomly generated at the start of each episode, including shrubs, walls, and pellets that agents interact with, impacting their decision-making and strategies.
-
 - **Hunger System:** Agents have a hunger timer that affects their behavior, requiring them to collect food (prey) or catch the prey (predator) to survive.
-
 - **Camera Perspectives:** The simulation includes multiple camera angles to view the environment from different perspectives, including overhead, side views, and the agent's point of view (POV).
 
 ## About the Project
 I built this project from scratch using the ML-Agents package in Unity, driven by my passion for machine learning and artificial intelligence. Everything you see here is the result of self-learning, building on the skills I've developed in game development. This project is not a game but a simulation. I chose C#/Unity because it offers a visual interface.
+
+## Learning Process
+The agents in this simulation learn through reinforcement learning, a process where they interact with their environment, make decisions, and receive rewards or penalties based on their actions. Over time, these interactions help the agents improve their behavior as their neural networks are updated with each experience.
 
 ## Reinforcement Learning Parameters
 Each agent is equipped with basic movement and vision capabilities using ray sensors. 
@@ -48,9 +47,6 @@ Each agent is equipped with basic movement and vision capabilities using ray sen
 **Penalties:**
 - Penalized for hitting a wall.
 - Penalized for starving.
-
-## Learning Process
-The agents in this simulation learn through reinforcement learning, a process where they interact with their environment, make decisions, and receive rewards or penalties based on their actions. Over time, these interactions help the agents improve their behavior as their neural networks are updated with each experience.
 
 ## Discoveries During Simulation
 I ran a 1,000,000-step training session and found some pretty interesting things along the way. Check out the clips from each step [here](https://drive.google.com/file/d/1tRmuYEN2a70zLzCFZwxRI4D_R0hqJYjp/view?usp=drive_link).
@@ -88,10 +84,10 @@ I ran a 1,000,000-step training session and found some pretty interesting things
 
 By step 1,000,000, both agents had found the most efficient way to exist in the environment they were placed in.
 
-### How to Run
+## How to Run
 You can download a zip of the built project from this [link](https://drive.google.com/file/d/1AWtH4ZbsOXxY0pNy-b7MkI9A6Ywi9g-Z/view?usp=drive_link). The agents' models included in the build are the highest-performing versions achieved through training.
 
-### Preview
+## Preview
 - **Main Menu:** [Preview the main menu here](https://drive.google.com/file/d/12yy0RJUTBPrJ8OTTE6zPkudSpFd4AFgA/view?usp=drive_link)
 - **About Page:** [Preview the about page here](https://drive.google.com/file/d/1_JXXQx3bYDSpO4pDlHipU8RrZVquqkWV/view?usp=drive_link)
 
