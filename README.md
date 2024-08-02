@@ -90,6 +90,12 @@ You can download a zip of the built project from this [link](https://drive.googl
 ## Preview
 - **Main Menu:** [Preview the main menu here](https://drive.google.com/file/d/12yy0RJUTBPrJ8OTTE6zPkudSpFd4AFgA/view?usp=drive_link)
 - **About Page:** [Preview the about page here](https://drive.google.com/file/d/1_JXXQx3bYDSpO4pDlHipU8RrZVquqkWV/view?usp=drive_link)
+- **Base View:** [Preview the base view here](https://drive.google.com/file/d/13475O9wNb2QPYwTgE_eL2XMQ0mOaV3Xs/view?usp=drive_link)
+- **Top View:** [Preview the top view here](https://drive.google.com/file/d/1HGyA8Yp7nCGbMQNc-Wu3w-ldL-dY7Nq5/view?usp=drive_link)
+- **Side Views:** [Preview the side views here](https://drive.google.com/file/d/1TLkO2S5Pa7PYSFDkGBDpDrd49HNCXC05/view?usp=drive_link)
+- **Deer POV:** [Preview the deer POV here](https://drive.google.com/file/d/1DFN7DGO10PjgeWTA9g_RXcKBPu9UKkra/view?usp=drive_link)
+- **Tiger POV:** [Preview the tiger POV here](https://drive.google.com/file/d/13475O9wNb2QPYwTgE_eL2XMQ0mOaV3Xs/view?usp=drive_link)
+
 
 ## Contact
 If you have any questions, suggestions, or just want to connect, feel free to reach out to me:
