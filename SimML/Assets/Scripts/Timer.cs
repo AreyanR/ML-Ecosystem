@@ -8,7 +8,6 @@ public class Timer : MonoBehaviour
     [SerializeField] TextMeshProUGUI time;
     float elapsedTime;
 
-    // Update is called once per frame
     void Update()
     {
         elapsedTime += Time.deltaTime;

@@ -4,26 +4,28 @@ using UnityEngine;
 
 public class SceneSetup : MonoBehaviour
 {
-    public List<GameObject> shrubPrefabs;
-    public List<int> numberOfShrubs;
+    public List<GameObject> shrubPrefabs; // List of shrub prefabs to spawn
+    public List<int> numberOfShrubs; // List of corresponding numbers of each shrub to spawn
 
-    private Vector3 spawnAreaMin = new Vector3(-9, 0, -9);
-    private Vector3 spawnAreaMax = new Vector3(9, 0, 9);
+    private Vector3 spawnAreaMin = new Vector3(-9, 0, -9); // Minimum spawn area coordinates
+    private Vector3 spawnAreaMax = new Vector3(9, 0, 9); // Maximum spawn area coordinates
 
-    public Transform shrubContainer;
+    public Transform shrubContainer; // Container to hold spawned shrubs
 
+    // Initializes the environment by resetting it
     void Start()
     {
         ResetEnvironment();
     }
 
+    // Resets the environment by clearing existing shrubs and spawning new ones
     public void ResetEnvironment()
     {
         if (shrubContainer != null)
         {
             foreach (Transform child in shrubContainer)
             {
-                Destroy(child.gameObject);
+                Destroy(child.gameObject); // Destroy all existing shrubs
             }
         }
 
@@ -35,10 +37,13 @@ public class SceneSetup : MonoBehaviour
 
         for (int i = 0; i < shrubPrefabs.Count; i++)
         {
-            SpawnObjects(shrubPrefabs[i], numberOfShrubs[i]);
+            SpawnObjects(shrubPrefabs[i], numberOfShrubs[i]); // Spawn shrubs according to the defined lists
         }
     }
 
+    // Spawns a specified number of objects within the defined spawn area
+    // prefab: The prefab to instantiate
+    // count: The number of instances to create
     void SpawnObjects(GameObject prefab, int count)
     {
         if (shrubContainer == null)
@@ -47,8 +52,8 @@ public class SceneSetup : MonoBehaviour
             return;
         }
 
-        Vector3 containerPosition = shrubContainer.position;
-        Vector3 containerScale = shrubContainer.localScale;
+        Vector3 containerPosition = shrubContainer.position; // Position of the shrub container
+        Vector3 containerScale = shrubContainer.localScale; // Scale of the shrub container
 
         for (int i = 0; i < count; i++)
         {
@@ -60,9 +65,9 @@ public class SceneSetup : MonoBehaviour
 
             Vector3 worldPosition = containerPosition + Vector3.Scale(randomPosition, containerScale);
 
-            GameObject spawnedObject = Instantiate(prefab, worldPosition, Quaternion.identity);
+            GameObject spawnedObject = Instantiate(prefab, worldPosition, Quaternion.identity); // Spawn the shrub
 
-            spawnedObject.transform.SetParent(shrubContainer);
+            spawnedObject.transform.SetParent(shrubContainer); // Set the shrub's parent to the container
         }
     }
 }

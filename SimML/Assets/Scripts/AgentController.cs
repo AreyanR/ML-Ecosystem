@@ -8,32 +8,27 @@ using Unity.MLAgents.Sensors;
 
 public class AgentController : Agent
 {
-    // Pellet variables
     public GameObject food;
     [SerializeField] private List<GameObject> spawnedPelletList = new List<GameObject>();
     [SerializeField] private Transform target;
-    [SerializeField] private int pelletCount = 5; // Serialized field for the number of pellets
+    [SerializeField] private int pelletCount = 5;
 
-    // Agent variables
     [SerializeField] private float moveSpeed = 4f;
     private Rigidbody rb;
 
-    // Env variables
     [SerializeField] private Transform environmentLocation;
     Material envMaterial;
     public GameObject env;
     public List<GameObject> shrubs;
 
-    // Hunger timer variables
     [SerializeField] private float agentHungerDuration;
     private float agentHungerTimeLeft;
 
-    // Slider UI component
     public Slider hungerSlider;
 
-    // Enemy Hunter
     public HunterController HunterController;
 
+    // Initializes the agent and environment settings.
     public override void Initialize()
     {
         rb = GetComponent<Rigidbody>();
@@ -41,6 +36,7 @@ public class AgentController : Agent
         hungerSlider.maxValue = agentHungerDuration;
     }
 
+    // Called at the start of each episode to reset the environment and agent.
     public override void OnEpisodeBegin()
     {
         SceneSetup sceneSetup = transform.parent.GetComponentInChildren<SceneSetup>();
@@ -49,27 +45,26 @@ public class AgentController : Agent
             sceneSetup.ResetEnvironment();
         }
 
-        // Agent
         RespawnAgent();
-
-        // Pellet
         RemoveAllPellets();
         CreatePellets();
-
-        // Hunger timer for agent
         StartAgentHungerTimer();
     }
 
+    // Updates the agent's hunger timer each frame.
     private void Update()
     {
         CheckAgentHungerTime();
     }
 
+    // Creates the specified number of pellets in the environment.
     private void CreatePellets()
     {
         CreatePellet(pelletCount);
     }
 
+    // Creates pellets at random valid locations within the environment.
+    // count: Number of pellets to create.
     private void CreatePellet(int count)
     {
         for (int i = 0; i < count; i++)
@@ -84,7 +79,7 @@ public class AgentController : Agent
 
                 foreach (GameObject shrub in shrubs)
                 {
-                    if (CheckOverlap(pelletLocation, shrub.transform.localPosition, 1.0f)) // Check overlap with shrubs
+                    if (CheckOverlap(pelletLocation, shrub.transform.localPosition, 1.0f))
                     {
                         positionValid = false;
                         break;
@@ -93,14 +88,14 @@ public class AgentController : Agent
 
                 foreach (GameObject pellet in spawnedPelletList)
                 {
-                    if (CheckOverlap(pelletLocation, pellet.transform.localPosition, 1.0f)) // Check overlap with other pellets
+                    if (CheckOverlap(pelletLocation, pellet.transform.localPosition, 1.0f))
                     {
                         positionValid = false;
                         break;
                     }
                 }
 
-                if (CheckOverlap(pelletLocation, transform.localPosition, 1.0f)) // Check overlap with agent
+                if (CheckOverlap(pelletLocation, transform.localPosition, 1.0f))
                 {
                     positionValid = false;
                 }
@@ -113,12 +108,17 @@ public class AgentController : Agent
         }
     }
 
+    // Checks if two objects overlap within a certain distance.
+    // overlappingObj: Position of the overlapping object.
+    // existingObj: Position of the existing object.
+    // minDistance: Minimum distance required to avoid overlap.
     public bool CheckOverlap(Vector3 overlappingObj, Vector3 existingObj, float minDistance)
     {
         float distancebtw = Vector3.Distance(overlappingObj, existingObj);
-        return distancebtw < minDistance; // Overlap condition
+        return distancebtw < minDistance;
     }
 
+    // Removes all pellets from the environment.
     public void RemoveAllPellets()
     {
         foreach (GameObject pellet in spawnedPelletList)
@@ -128,12 +128,14 @@ public class AgentController : Agent
         spawnedPelletList.Clear();
     }
 
+    // Collects observations from the environment to feed to the agent's neural network.
     public override void CollectObservations(VectorSensor sensor)
     {
         sensor.AddObservation(transform.localPosition);
         sensor.AddObservation(target.localPosition);
     }
 
+    // Processes actions received from the agent's neural network.
     public override void OnActionReceived(ActionBuffers actions)
     {
         float moveRotate = actions.ContinuousActions[0];
@@ -143,6 +145,7 @@ public class AgentController : Agent
         transform.Rotate(0f, moveRotate * moveSpeed, 0f, Space.Self);
     }
 
+    // Provides manual input for testing the agent's behavior.
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
@@ -150,6 +153,7 @@ public class AgentController : Agent
         continuousActions[1] = Input.GetAxisRaw("Vertical");
     }
 
+    // Handles interactions with trigger colliders.
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Pellet")
@@ -158,17 +162,15 @@ public class AgentController : Agent
             Destroy(other.gameObject);
             AddReward(20f);
             agentHungerTimeLeft += 20f;
-            agentHungerTimeLeft = Mathf.Clamp(agentHungerTimeLeft, 0, agentHungerDuration); // Clamp the hunger time
+            agentHungerTimeLeft = Mathf.Clamp(agentHungerTimeLeft, 0, agentHungerDuration);
             hungerSlider.value = agentHungerTimeLeft;
 
-            // Check if all pellets are collected
             if (spawnedPelletList.Count == 0)
             {
                 Debug.Log("Prey got all the food");
                 AddReward(5f);
                 HunterController.EndEpisode();
-                EndEpisode(); // End episode for both agents
-                //CreatePellets();
+                EndEpisode();
             }
         }
 
@@ -176,18 +178,20 @@ public class AgentController : Agent
         {
             Debug.Log("Prey hit wall");
             AddReward(-15f);
-            RemoveAllPellets(); // Remove all pellets when hitting a wall
+            RemoveAllPellets();
             HunterController.EndEpisode();
-            EndEpisode(); // End episode for both agents
+            EndEpisode();
         }
     }
 
+    // Starts the hunger timer for the agent.
     private void StartAgentHungerTimer()
     {
         agentHungerTimeLeft = agentHungerDuration;
         hungerSlider.value = agentHungerTimeLeft;
     }
 
+    // Checks the agent's remaining hunger time and ends the episode if time runs out.
     private void CheckAgentHungerTime()
     {
         agentHungerTimeLeft -= Time.deltaTime;
@@ -197,31 +201,28 @@ public class AgentController : Agent
         {
             Debug.Log("Prey starved");
             AddReward(-15f);
-            RemoveAllPellets(); // Remove all pellets when starving
+            RemoveAllPellets();
             HunterController.EndEpisode();
-            EndEpisode(); // End episode for both agents
+            EndEpisode();
         }
     }
 
+    // Respawns the agent at a random valid location in the environment.
     public void RespawnAgent()
-{
-    // Ensure the agent respawns at a new random location, not too close to the hunter
-    Vector3 spawnLocation = Vector3.zero; // Initialize with a default value
-    bool positionValid = false;
-
-    while (!positionValid)
     {
-        spawnLocation = new Vector3(Random.Range(-8f, 8f), 0.31f, Random.Range(-8f, 8f));
-        positionValid = !CheckOverlap(spawnLocation, HunterController.transform.localPosition, 7f); // Ensure it's at least 5 units away from the hunter
+        Vector3 spawnLocation = Vector3.zero;
+        bool positionValid = false;
+
+        while (!positionValid)
+        {
+            spawnLocation = new Vector3(Random.Range(-8f, 8f), 0.31f, Random.Range(-8f, 8f));
+            positionValid = !CheckOverlap(spawnLocation, HunterController.transform.localPosition, 7f);
+        }
+
+        transform.localPosition = spawnLocation;
+
+        StartAgentHungerTimer();
+        RemoveAllPellets();
+        CreatePellets();
     }
-
-    transform.localPosition = spawnLocation;
-
-    // Reset the hunger timer
-    StartAgentHungerTimer();
-
-    // Regenerate pellets
-    RemoveAllPellets();
-    CreatePellets();
-}
 }

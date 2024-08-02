@@ -11,9 +11,9 @@ public class CameraMover : MonoBehaviour
     private const float yOffset = 1.5f; // Y offset to keep the camera above the ground for agent POV
     private const float zOffset = 1.5f; // Z offset for agent POV
 
+    // Initializes the camera positions and rotations
     private void Start()
     {
-        // Initialize the list of target positions and rotations
         targetTransforms = new List<CameraTransform>
         {
             new CameraTransform(new Vector3(0, 18, 0), new Vector3(90, 0, 0)),     // Top View
@@ -27,7 +27,7 @@ public class CameraMover : MonoBehaviour
         baseView = new CameraTransform(new Vector3(0, 12, -11.5f), new Vector3(55, 0, 0)); // Base View
     }
 
-    // Method to move the camera to the next target position and rotation in the list
+    // Moves the camera to the next target position and rotation in the list
     public void MoveCamera()
     {
         int totalViews = targetTransforms.Count + agents.Count + 1; // Total views including Base View
