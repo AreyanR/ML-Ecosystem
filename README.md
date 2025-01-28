@@ -89,9 +89,9 @@ You can download a zip of the built project from this [link](https://drive.googl
 
 ## Preview
 
-|  |||
-|:---:|:---:|:---:|
-| ![Preview1](images/preview1.png) | ![Preview2](images/preview2.png) ||
+| Main Menu | About the Project Page |
+|:---:|:---:|
+| ![Preview1](images/preview2.png) | ![Preview2](images/preview1.png) |
 
 | Base View | Top View | Side Views |
 |:---:|:---:|:---:|
