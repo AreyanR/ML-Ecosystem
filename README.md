@@ -97,9 +97,9 @@ You can download a zip of the built project from this [link](https://drive.googl
 |:---:|:---:|:---:|
 | ![Base View](images/baseview.gif) | ![Top View](images/topview.gif) | ![Side Views](images/sideview.gif) |
 
-| Deer POV | Tiger POV ||
-|:---:|:---:|:---:|
-| ![Deer POV](images/deerpov.gif) | ![Tiger POV](images/tigerpov.gif) ||
+| Deer POV | Tiger POV |
+|:---:|:---:|
+| ![Deer POV](images/deerpov.gif) | ![Tiger POV](images/tigerpov.gif) |
 
 ## Contact
 If you have any questions, suggestions, or just want to connect, feel free to reach out to me:
