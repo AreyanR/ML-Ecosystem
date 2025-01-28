@@ -85,17 +85,21 @@ I ran a 1,000,000-step training session and found some pretty interesting things
 By step 1,000,000, both agents had found the most efficient way to exist in the environment they were placed in.
 
 ## How to Run
-You can download a zip of the built project from this [link](https://drive.google.com/file/d/1AWtH4ZbsOXxY0pNy-b7MkI9A6Ywi9g-Z/view?usp=drive_link). The agents' models included in the build are the highest-performing versions achieved through training.
+You can download a zip of the built project from this [link](https://drive.google.com/file/d/1AWtH4ZbsOXxY0pNy-b7MkI9A6Ywi9g-Z/view?usp=drive_link). The agents models included in the build are the highest-performing versions achieved through training.
 
 ## Preview
-- **Main Menu:** [Preview the main menu here](https://drive.google.com/file/d/12yy0RJUTBPrJ8OTTE6zPkudSpFd4AFgA/view?usp=drive_link)
-- **About Page:** [Preview the about page here](https://drive.google.com/file/d/1_JXXQx3bYDSpO4pDlHipU8RrZVquqkWV/view?usp=drive_link)
-- **Base View:** [Preview the base view here](https://drive.google.com/file/d/1z7hZStcbdHjrg3v93xLprFXWBBheiriv/view?usp=sharing)
-- **Top View:** [Preview the top view here](https://drive.google.com/file/d/1HGyA8Yp7nCGbMQNc-Wu3w-ldL-dY7Nq5/view?usp=drive_link)
-- **Side Views:** [Preview the side views here](https://drive.google.com/file/d/1TLkO2S5Pa7PYSFDkGBDpDrd49HNCXC05/view?usp=drive_link)
-- **Deer POV:** [Preview the deer POV here](https://drive.google.com/file/d/1DFN7DGO10PjgeWTA9g_RXcKBPu9UKkra/view?usp=drive_link)
-- **Tiger POV:** [Preview the tiger POV here](https://drive.google.com/file/d/13475O9wNb2QPYwTgE_eL2XMQ0mOaV3Xs/view?usp=drive_link)
 
+|  |||
+|:---:|:---:|:---:|
+| ![Preview1](images/preview1.png) | ![Preview2](images/preview2.png) ||
+
+| Base View | Top View | Side Views |
+|:---:|:---:|:---:|
+| ![Base View](images/baseview.gif) | ![Top View](images/topview.gif) | ![Side Views](images/sideview.gif) |
+
+| Deer POV | Tiger POV ||
+|:---:|:---:|:---:|
+| ![Deer POV](images/deerpov.gif) | ![Tiger POV](images/tigerpov.gif) ||
 
 ## Contact
 If you have any questions, suggestions, or just want to connect, feel free to reach out to me:
