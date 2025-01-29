@@ -93,11 +93,11 @@ You can download a zip of the built project from this [link](https://drive.googl
 |:---:|:---:|
 | ![Preview1](images/preview2.png) | ![Preview2](images/preview1.png) |
 
-| Base View | Top View | Side Views |
+| [Base View](https://drive.google.com/file/d/1z7hZStcbdHjrg3v93xLprFXWBBheiriv/view?usp=sharing) | [Top View](https://drive.google.com/file/d/1HGyA8Yp7nCGbMQNc-Wu3w-ldL-dY7Nq5/view?usp=sharing) | [Side View](https://drive.google.com/file/d/1TLkO2S5Pa7PYSFDkGBDpDrd49HNCXC05/view?usp=sharing) |
 |:---:|:---:|:---:|
-| ![Base View](images/baseview.gif) | ![Top View](images/topview.gif) | ![Side Views](images/sideview.gif) |
+| ![Base View](images/baseview.gif) | ![Top View](images/topview.gif) | ![Side View](images/sideview.gif) |
 
-| Deer POV | Tiger POV |
+| [Deer POV](https://drive.google.com/file/d/1DFN7DGO10PjgeWTA9g_RXcKBPu9UKkra/view?usp=sharing) | [Tiger POV](https://drive.google.com/file/d/13475O9wNb2QPYwTgE_eL2XMQ0mOaV3Xs/view?usp=sharing) |
 |:---:|:---:|
 | ![Deer POV](images/deerpov.gif) | ![Tiger POV](images/tigerpov.gif) |
 
