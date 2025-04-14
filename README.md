@@ -1,5 +1,20 @@
 # Prey and Predator Machine Learning Simulation 
 
+## Preview
+
+| Main Menu | About the Project Page |
+|:---:|:---:|
+| ![Preview1](images/preview2.png) | ![Preview2](images/preview1.png) |
+
+| [Base View](https://drive.google.com/file/d/1z7hZStcbdHjrg3v93xLprFXWBBheiriv/view?usp=sharing) | [Top View](https://drive.google.com/file/d/1HGyA8Yp7nCGbMQNc-Wu3w-ldL-dY7Nq5/view?usp=sharing) | [Side View](https://drive.google.com/file/d/1TLkO2S5Pa7PYSFDkGBDpDrd49HNCXC05/view?usp=sharing) |
+|:---:|:---:|:---:|
+| ![Base View](images/baseview.gif) | ![Top View](images/topview.gif) | ![Side View](images/sideview.gif) |
+
+| [Deer POV](https://drive.google.com/file/d/1DFN7DGO10PjgeWTA9g_RXcKBPu9UKkra/view?usp=sharing) | [Tiger POV](https://drive.google.com/file/d/13475O9wNb2QPYwTgE_eL2XMQ0mOaV3Xs/view?usp=sharing) |
+|:---:|:---:|
+| ![Deer POV](images/deerpov.gif) | ![Tiger POV](images/tigerpov.gif) |
+
+
 ## Description
 This project is a machine learning simulation that explores the dynamics between prey and predator agents within a controlled environment. Using Unity's ML-Agents toolkit, two AI agents—a deer (prey) and a tiger (predator)—are trained with reinforcement learning algorithms to survive and achieve their goals. The simulation provides insights into how AI agents can learn complex behaviors through interaction with their environment and each other.
 
@@ -86,20 +101,6 @@ By step 1,000,000, both agents had found the most efficient way to exist in the 
 
 ## How to Run
 You can download a zip of the built project from this [link](https://drive.google.com/file/d/1AWtH4ZbsOXxY0pNy-b7MkI9A6Ywi9g-Z/view?usp=drive_link). The agents models included in the build are the highest-performing versions achieved through training.
-
-## Preview
-
-| Main Menu | About the Project Page |
-|:---:|:---:|
-| ![Preview1](images/preview2.png) | ![Preview2](images/preview1.png) |
-
-| [Base View](https://drive.google.com/file/d/1z7hZStcbdHjrg3v93xLprFXWBBheiriv/view?usp=sharing) | [Top View](https://drive.google.com/file/d/1HGyA8Yp7nCGbMQNc-Wu3w-ldL-dY7Nq5/view?usp=sharing) | [Side View](https://drive.google.com/file/d/1TLkO2S5Pa7PYSFDkGBDpDrd49HNCXC05/view?usp=sharing) |
-|:---:|:---:|:---:|
-| ![Base View](images/baseview.gif) | ![Top View](images/topview.gif) | ![Side View](images/sideview.gif) |
-
-| [Deer POV](https://drive.google.com/file/d/1DFN7DGO10PjgeWTA9g_RXcKBPu9UKkra/view?usp=sharing) | [Tiger POV](https://drive.google.com/file/d/13475O9wNb2QPYwTgE_eL2XMQ0mOaV3Xs/view?usp=sharing) |
-|:---:|:---:|
-| ![Deer POV](images/deerpov.gif) | ![Tiger POV](images/tigerpov.gif) |
 
 ## Contact
 If you have any questions, suggestions, or just want to connect, feel free to reach out to me:
